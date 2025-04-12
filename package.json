@@ -1,0 +1,49 @@
+{
+  "name": "@srcgrp/sentry-mcp-server",
+  "version": "1.0.0",
+  "description": "Connect Sentry issues to your MCP workflow",
+  "author": "Saeed Akasteh",
+  "license": "MIT",
+  "keywords": [
+    "sentry",
+    "mcp",
+    "model-context-protocol",
+    "cline",
+    "error-tracking",
+    "issues",
+    "release-health"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srcgrp/sentry-mcp-server"
+  },
+  "type": "module",
+  "main": "./build/index.js",
+  "bin": {
+    "sentry-mcp-server": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "@sentry/node": "^9.12.0",
+    "axios": "^1.8.4",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
