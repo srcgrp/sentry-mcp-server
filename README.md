@@ -14,24 +14,34 @@ Gain insights into your application's stability by accessing Sentry release heal
 
 ## Setup
 
-1.  **Install the Server:**
+1.  **Clone the Repository:**
+    Clone this repository to your local machine:
     ```bash
-    npm install -g sentry-mcp-server 
-    # Note: Replace 'sentry-mcp-server' with the actual published package name if different.
-    # You might need sudo depending on your npm permissions.
+    git clone https://github.com/srcgrp/sentry-mcp-server.git
+    cd sentry-mcp-server
     ```
 
-2.  **Configure MCP Client:**
-    Add the server to your MCP client's configuration file (e.g., `cline_mcp_settings.json` for Cline):
+2.  **Install Dependencies & Build:**
+    Install the necessary dependencies and build the server:
+    ```bash
+    npm install
+    npm run build 
+    ```
+    This will create the executable server script in the `build/` directory.
+
+3.  **Configure MCP Client:**
+    Add the server to your MCP client's configuration file (e.g., `cline_mcp_settings.json` for Cline). **Make sure to use the absolute path** to the built `index.js` file:
 
     ```json
     {
       "mcpServers": {
-        "sentry": { // You can choose any name here
-          "command": "sentry-mcp-server", // Use the command name from installation
-          "args": [],
+        "sentry-local": { // You can choose any name here
+          "command": "node", 
+          "args": [
+            "/path/to/your/cloned/sentry-mcp-server/build/index.js" // <-- IMPORTANT: Use absolute path here
+          ],
           "env": {
-            // Environment variables will be loaded from your .env file (see below)
+            // Environment variables can be set here OR loaded from a .env file (see next step)
           },
           "disabled": false, // Ensure it's enabled
           "autoApprove": [] 
@@ -42,8 +52,8 @@ Gain insights into your application's stability by accessing Sentry release heal
     ```
     *Restart your MCP client (e.g., reload VS Code) after modifying the settings.*
 
-3.  **Create `.env` File:**
-    In the directory where you run your MCP client (or a location accessible by it), create a `.env` file with the following required variables:
+4.  **Create `.env` File:**
+    In the **root directory of the cloned `sentry-mcp-server` project**, create a `.env` file with the following required variables:
 
     ```dotenv
     # Required Sentry Credentials & Configuration
@@ -244,6 +254,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support & Contributing
 
-For issues, questions, or feature requests, please open an issue on the [GitHub repository](https://github.com/yourusername/sentry-mcp-server) (replace with your actual repository URL).
+For issues, questions, or feature requests, please open an issue on the [GitHub repository](https://github.com/srcgrp/sentry-mcp-server).
 
 Contributions are welcome! Please follow standard fork-and-pull-request workflows.
